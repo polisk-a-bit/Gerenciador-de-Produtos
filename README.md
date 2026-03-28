@@ -1,7 +1,7 @@
 # Gerenciador-de-Produtos
 Um gerenciador de produtos feito utilizando Pyhton e HTML
 
-Para iniciar o programa, execute o arquivo main.py
+Para iniciar o programa, execute o arquivo `main.py`
 
 --Sumário dos Arquivos:
 
