@@ -1,0 +1,79 @@
+{% extends "homepage.html" %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block titulo %}
+        SGP - Editar Produto
+        {% endblock %}</title>
+</head>
+
+<body>
+    {% block content %}
+    <header class="header">
+        <h2>Editar Produto</h2>
+        <div class="menu">
+            <a style="width: 100px;" href="{{url_for('gerenciador')}}">Voltar</a>
+        </div>
+    </header>
+    <div>
+        <form method="POST" class="form">
+            <div class="modal" id="popup_excluir">
+                <div class="popup-excluir">
+                    <h2>Tem certeza de que deseja excluir o produto?</h2>
+                    <div class="popup-excluir-botoes">
+                        <button class="botao-excluir" type="submit" name="deletar" value="delete">Excluir</button>
+                        <a href="#"
+                            onclick="document.getElementById('popup_excluir').style.display='none'; return true;">Voltar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-form">
+                <h2>Editar Produto</h2>
+                {{form.csrf_token}}
+
+                <div class="div-input">
+                    {{form.nome_prod.label(class='label')}}
+                    {{form.nome_prod(class='input')}}
+                </div>
+
+                <div class="div-input">
+                    {{form.preco.label(class='label')}}
+                    {{form.preco(class='input')}}
+                </div>
+
+                <div class="div-input">
+                    {{form.quantidade_est.label(class='label')}}
+                    {{form.quantidade_est(class='input')}}
+                </div>
+
+                <div class="div-botao">
+                    {{form.botao_confirm(class='botao')}}
+                    <a id="link-excluir" href="#"
+                        onclick="document.getElementById('popup_excluir').style.display='flex'; return true;">Excluir
+                        Produto
+                    </a>
+
+                </div>
+            </div>
+        </form>
+    </div>
+    {% endblock %}
+</body>
+
+<script>
+    function abrirModal() {
+        document.body.classList.add('modal-aberto');
+    }
+
+    function fecharModal() {
+        document.body.classList.remove('modal-aberto');
+    }
+</script>
+
+</html>

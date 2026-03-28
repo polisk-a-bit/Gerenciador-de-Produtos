@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+{% block head %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block titulo %}
+        SGP - Página Inicial
+        {% endblock %}
+    </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/media_queries.css') }}">
+</head>
+{% endblock %}
+{% block body %}
+
+<body>
+
+    {% block content %}
+
+    <div>
+
+        <div class="card-form">
+            <h1>Sistema de Gerenciamento de Produtos</h1>
+            <form method="POST" class="form">
+                {{form.csrf_token}}
+
+                <div class="div-input">
+                    {{form.email.label(class='label')}}
+                    {{form.email(class='input')}}
+                </div>
+
+                <div class="div-input">
+                    {{form.senha.label(class='label')}}
+                    {{form.senha(class='input')}}
+                </div>
+
+                <div class="div-botao">
+                    {{form.botao_confirm(class='botao')}}
+                    <p>Não tem uma conta ainda? <a class="link" href="{{ url_for('criar_conta') }}">Criar Conta</a></p>
+                </div>
+            </form>
+        </div>
+
+    </div>
+    {% endblock %}
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div id="messagem" class="messagem">{{ message }}
+        <button class="botao-menssagem"
+            onclick="document.getElementById('messagem').style.display='none'; return true;">X</button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+</body>
+{% endblock %}
+
+
+
+</html>

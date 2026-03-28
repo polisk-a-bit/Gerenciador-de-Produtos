@@ -1,0 +1,56 @@
+{% extends "homepage.html" %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block titulo %}
+        SGP - Criar Conta
+        {% endblock %}
+    </title>
+</head>
+
+
+<body>
+    {% block content %}
+    <div>
+        <div class="card-form">
+            <h2>Sistema de Gerenciamento de Produtos</h2>
+            <form method="POST" class="form">
+
+                {{form.csrf_token}}
+
+                <div class="div-input">
+                    {{form.username.label(class='label')}}
+                    {{form.username(class='input')}}
+                </div>
+
+                <div class="div-input">
+                    {{form.email.label(class='label')}}
+                    {{form.email(class='input')}}
+                </div>
+
+                <div class="div-input">
+                    {{form.senha.label(class='label')}}
+                    {{form.senha(class='input')}}
+                </div>
+
+                <div class="div-input">
+                    {{form.senha_confirm.label(class='label')}}
+                    {{form.senha_confirm(class='input')}}
+                </div>
+
+                <div class="div-botao">
+                    {{form.botao_confirm(class='botao')}}
+                    <p>Já possui uma conta? <a class="link" href="{{url_for('homepage')}}">Faça Login</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+    {% endblock %}
+</body>
+
+
+</html>

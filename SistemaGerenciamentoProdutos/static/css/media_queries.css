@@ -1,0 +1,323 @@
+@media only screen and (min-width: 426px) and (max-width: 768px) {
+    .div-botao p {
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    .botao {
+        width: 65%;
+    }
+
+    #botao_confirm {
+        width: 65%;
+        font-size: 10px;
+    }
+
+    .card-form h2 {
+        font-size: 24px;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 880px) {
+    #botao_confirm {
+        font-size: 10px;
+    }
+}
+
+@media only screen and (max-width: 406px) {
+    h1 {
+        font-size: 16px;
+    }
+}
+
+
+@media only screen and (min-width: 550px) and (max-width: 628px) {
+    .botao {
+        width: 65%;
+        font-size: 12px;
+    }
+
+    #botao_confirm {
+        width: 65%;
+        font-size: 12px;
+    }
+
+
+    #link-excluir {
+        font-size: 12px;
+    }
+}
+
+@media only screen and (max-width: 549px) {
+    .botao {
+        width: auto;
+        font-size: 8px;
+    }
+
+    #botao_confirm {
+        width: auto;
+        font-size: 8px;
+    }
+
+    #link-excluir {
+        width: auto;
+        font-size: 8px;
+    }
+}
+
+
+@media only screen and (min-width: 406px) and (max-width: 628px) {
+    h1 {
+        font-size: 22px;
+    }
+}
+
+@media only screen and (min-width: 394px) and (max-width: 628px) {
+    .card-form h2 {
+        font-size: 22px;
+    }
+}
+
+@media only screen and (max-width: 394px) {
+    .card-form h2 {
+        font-size: 16px;
+    }
+}
+
+@media only screen and (max-width: 628px) {
+    .div-botao p {
+        text-align: center;
+    }
+
+
+}
+
+@media only screen and (min-width: 901px) and (max-width: 1090px) {
+
+    h1 {
+        font-size: 26px;
+    }
+
+    .card-form h2 {
+        font-size: 26px;
+    }
+
+    .botao-enviar {
+        padding: 6px 14px;
+        width: 80%;
+    }
+
+    #card-form-perfil {
+        margin-top: 4%;
+    }
+}
+
+@media only screen and (min-width: 663px) and (max-width: 900px) {
+    .botao-enviar {
+        font-size: 0px;
+        width: auto;
+    }
+}
+
+@media only screen and (max-width: 608px) {
+    .label {
+        text-align: center;
+        margin-right: 15px;
+        font-size: 14px;
+    }
+
+
+}
+
+@media only screen and (min-width: 736px) and (max-width: 984px) {
+    .header h2 {
+        font-size: 30px;
+    }
+
+    .menu {
+        gap: 75px;
+    }
+}
+
+@media only screen and (min-width: 564px) and (max-width: 900px) {
+
+    .div-foto img {
+        height: 150px;
+        width: 150px;
+    }
+
+    #card-form-perfil {
+        gap: 30px;
+    }
+}
+
+@media only screen and (max-width: 384px) {
+    #card-form-perfil {
+        gap: 20px;
+    }
+}
+
+@media only screen and (max-width: 564px) {
+
+    .div-foto img {
+        height: 100px;
+        width: 100px;
+    }
+
+    .botao-enviar {
+        padding: 4px 8px;
+        font-size: 8px;
+    }
+}
+
+@media only screen and (max-width: 662px) {
+    .botao-enviar {
+        font-size: 0px;
+        display: flex;
+
+    }
+
+    input[type="file"]::file-selector-button {
+        font-size: 14px;
+        padding: 6px 14px;
+        width: auto;
+    }
+
+}
+
+@media only screen and (max-width: 564px) {
+    input[type="file"]::file-selector-button {
+        font-size: 10px;
+        padding: 4px 10px;
+        width: auto;
+    }
+}
+
+@media only screen and (max-width: 298px) {
+    .div-foto img {
+        height: 75px;
+        width: 75px;
+    }
+}
+
+@media only screen and (min-width: 736px) and (max-width: 804px) {
+    .header h2 {
+        font-size: 24px;
+    }
+}
+
+@media only screen and (max-width: 736px) {
+    .header h2 {
+        font-size: 18px;
+    }
+
+    .menu {
+        gap: 25px;
+    }
+}
+
+@media only screen and (max-width: 558px) {
+    .menu {
+        position: absolute;
+        width: 70%;
+        bottom: 0%;
+        left: 50%;
+        transform: translate(-50%, -0%);
+    }
+
+    .menu a {
+        padding: 0%;
+    }
+
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        height: 200px;
+        padding: 0;
+    }
+}
+
+@media only screen and (min-width: 446px) and (max-width: 558px) {
+
+    .menu a {
+        padding: 0%;
+    }
+}
+
+
+@media only screen and (max-width:669px) {
+
+
+    .produto p {
+        font-size: 6px;
+    }
+}
+
+@media only screen and (min-width:669px) and (max-width:827px) {
+    .produto {
+        width: 80%;
+    }
+
+    .produto p {
+        font-size: 8px;
+    }
+}
+
+
+
+@media only screen and (min-width:827px) and (max-width: 1135px) {
+    .produto {
+        width: 80%;
+    }
+
+    .produto p {
+        font-size: 12px;
+    }
+}
+
+@media only screen and (max-width: 1141px) {
+    #text {
+        font-size: 0px;
+    }
+
+}
+
+@media only screen and (max-width: 410px) {
+    #text-2 {
+        font-size: 8px;
+    }
+}
+
+@media only screen and (min-width: 410px) and (max-width: 561px) {
+    #text-2 {
+        font-size: 16px;
+    }
+}
+
+@media only screen and (max-width: 722px) {
+    .botao-busca {
+        padding: 0%;
+    }
+
+    .input-busca {
+        padding: 0%;
+        width: 80%;
+    }
+}
+
+@media only screen and (min-width: 1141px) and (max-width:1559px) {
+    #text {
+        font-size: 18px;
+    }
+}
+
+@media only screen and (max-width:1559px) {
+    #form-busca-prod {
+        width: auto;
+    }
+}

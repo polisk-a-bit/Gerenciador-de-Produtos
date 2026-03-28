@@ -1,0 +1,87 @@
+{% extends "homepage.html" %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block titulo %}
+        SGP - Perfil
+        {% endblock %}</title>
+</head>
+
+<body>
+    <div>
+        {% block content %}
+        <header class="header">
+            <h2>Olá, {{usuario.username}}</h2>
+
+            <div class="menu">
+                {% if usuario.ADMIN == True %}
+                <a href="{{url_for('gerenciador_user', username_usuario=usuario.username)}}"
+                    id="gerenciar-usuarios">Gerenciar Usuários</a>
+                {% endif %}
+                <a href="{{url_for('gerenciador')}}">Voltar</a>
+                <a href="{{url_for('logout')}}" id="sair">Sair</a>
+            </div>
+        </header>
+
+        <div>
+            <form method="POST" enctype="multipart/form-data" class="form">
+                <div class="modal" id="popup_excluir">
+                    <div class="popup-excluir">
+                        <h2>Tem certeza de que deseja excluir a conta?</h2>
+                        <div class="popup-excluir-botoes">
+                            <button class="botao-excluir" type="submit" name="excluir" value="excluir">Excluir
+                                Conta</button>
+                            <a href="#"
+                                onclick="document.getElementById('popup_excluir').style.display='none'; return true;">Voltar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="card-form" style="height: 675px;" id="card-form-perfil">
+                    {{form.csrf_token}}
+
+                    <div class="div-foto">
+                        <img
+                            src="{{ url_for('static', filename='uploads/{}'.format(usuario.foto)) if usuario.foto else url_for('static', filename='foto_default/foto_default.png')}}">
+                        {{form.foto(class='botao-enviar', type='file')}}
+
+                    </div>
+
+                    <div class="div-input">
+                        {{form.username.label(class='label')}}
+                        {{form.username(class='input')}}
+                    </div>
+
+                    <div class="div-input">
+                        {{form.senha.label(class='label')}}
+                        {{form.senha(class='input')}}
+                    </div>
+
+                    <div class="div-input">
+                        {{form.senha_confirm.label(class='label')}}
+                        {{form.senha_confirm(class='input')}}
+                    </div>
+
+                    <div class="div-botao">
+                        {{form.botao_confirm(class='botao')}}
+                        {% if usuario.email != 'adm@gmail.com' %}
+                        <a id="link-excluir" href="#"
+                            onclick="document.getElementById('popup_excluir').style.display='flex'; return true;">Excluir
+                            Conta
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </form>
+        </div>
+        {% endblock %}
+    </div>
+
+</body>
+
+</html>

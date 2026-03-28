@@ -1,0 +1,268 @@
+{% extends "homepage.html" %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block titulo %}
+        SGP - Gerenciar Usuários
+        {% endblock %}
+    </title>
+</head>
+
+
+
+<body>
+    {% block content %}
+    <div>
+        <header class="header">
+            <h2>Gerenciar Usuários</h2>
+            <div class="menu">
+                <a href="{{url_for('perfil', username_usuario=usuario.username)}}">{{usuario.username}}</a>
+                <a href="{{url_for('gerenciador')}}">Voltar</a>
+                <a href="{{url_for('logout')}}" id="sair">Sair</a>
+            </div>
+        </header>
+
+        <content class="content-users">
+            <div class="usuarios">
+                <div class="tela">
+                    <div class="user-busca">
+                        <h2>Usuários</h2>
+                        <form method="POST" class="form-busca-user">
+                            {{form_busca_usuario.csrf_token}}
+
+                            {{form_busca_usuario.busca_user.label(class='label-busca-user')}}
+                            {{form_busca_usuario.busca_user(class='input-busca-user')}}
+
+                            {{form_busca_usuario.botao_confirm_user(class='botao-busca-user')}}
+
+                            <button type="submit" name="atualizar_user" value="user"
+                                class='botao-busca-user'>Atualizar</button>
+
+                        </form>
+                    </div>
+                    <div class="usuarios-tela">
+                        <div class="usuario">
+                            {% if usuarios_padrao %}
+                            {% for usuario_padrao in usuarios_padrao %}
+                            {% if usuario_padrao != None %}
+                            <div class="user-container">
+                                <div class="user">
+                                    <div class='detalhes-user-container'>
+                                        <img src="{{url_for('static', filename='uploads/{}'.format(usuario_padrao.foto)) if usuario_padrao.foto else url_for('static', filename='foto_default/foto_default.png')}}"
+                                            class="img-user">
+                                    </div>
+                                    <div class='detalhes-user-container'>
+                                        <p class="detalhes-user">ID Usuário: {{usuario_padrao.id}}</p>
+                                    </div>
+                                    <div class='detalhes-user-container'>
+                                        <p class="detalhes-user">Username: {{usuario_padrao.username}}</p>
+                                    </div>
+                                    <div class='detalhes-user-container'>
+                                        <p class="detalhes-user">Email: {{usuario_padrao.email}}</p>
+                                    </div>
+                                    <div class='detalhes-user-container'>
+                                        <p class="detalhes-user">Autorização ADM:
+                                            {{usuario_padrao.ADMIN}}
+                                        </p>
+                                    </div>
+                                    <div class='detalhes-user-container' style="border-right: none;">
+                                        <a class="editar-user" href="#"
+                                            onclick="document.getElementById('{{usuario_padrao.id}}').style.display='flex'; return true;">Editar
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal" id="{{usuario_padrao.id}}">
+                                <div class="popup-editar-user">
+                                    <div class="user-container">
+                                        <div class="user">
+                                            <div class='detalhes-user-container'>
+                                                <img src="{{url_for('static', filename='uploads/{}'.format(usuario_padrao.foto)) if usuario_padrao.foto else url_for('static', filename='foto_default/foto_default.png')}}"
+                                                    class="img-user">
+                                            </div>
+                                            <div class='detalhes-user-container'>
+                                                <p class="detalhes-user">ID Usuário: {{usuario_padrao.id}}</p>
+                                            </div>
+                                            <div class='detalhes-user-container'>
+                                                <p class="detalhes-user">Username: {{usuario_padrao.username}}</p>
+                                            </div>
+                                            <div class='detalhes-user-container'>
+                                                <p class="detalhes-user">Email: {{usuario_padrao.email}}</p>
+                                            </div>
+                                            <div class='detalhes-user-container' style="border-right: none;">
+                                                <p class="detalhes-user">Autorização ADM:
+                                                    {{usuario_padrao.ADMIN}}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="botoes-user">
+                                        <a href='#' onclick="document.getElementById('excluir_user_padrao_{{usuario_padrao.id}}').style.display='flex';
+                                                            return true;" class="botao-user">Excluir usuário
+                                        </a>
+                                        <div class="popup-user" id="excluir_user_padrao_{{usuario_padrao.id}}">
+                                            <h2 class="text">Tem certeza de que deseja excluir o usuário?</h2>
+                                            <a class="botao-excluir-user"
+                                                href="{{url_for('excluir_user', id_user=usuario_padrao.id)}}">Sim</a>
+                                            <a href="#" onclick="document.getElementById('excluir_user_padrao_{{usuario_padrao.id}}').style.display='none'; cla
+                                                            return true;" class="link">Voltar</a>
+                                        </div>
+
+                                        {% if usuario.email == 'adm@gmail.com' %}
+                                        <a href="#" onclick="document.getElementById('conceder_privilegios_{{usuario_padrao.id}}').style.display='flex';
+                                                            return true;" class="botao-user">Conceder
+                                            privlégios
+                                            administrativos</a>
+                                        <div class="popup-user" id="conceder_privilegios_{{usuario_padrao.id}}">
+                                            <h2 class="text">Conceder privilégios administrativos para o usuário?</h2>
+                                            <a class="botao-user"
+                                                href="{{url_for('conceder_privilegios', id_user=usuario_padrao.id)}}">Sim</a>
+                                            <a href="#" onclick="document.getElementById('conceder_privilegios_{{usuario_padrao.id}}').style.display='none';
+                                                            return true;" class="link">Voltar</a>
+                                        </div>
+                                        {% endif %}
+
+                                        <a href="#" onclick="document.getElementById('{{usuario_padrao.id}}').style.display='none';
+                                                            return true;" class="link">Voltar</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if usuario_padrao == None %}
+                            <h2 class="sem-user">Usuário não encontrado!</h2>
+                            {% endif %}
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+
+                    </div>
+                </div>
+                {% if usuario.email == 'adm@gmail.com' %}
+                <div class="tela">
+                    <div class="user-busca">
+                        <h2>ADMs</h2>
+                        <form method="POST" class="form-busca-user">
+                            {{form_busca_ADM.csrf_token}}
+
+                            {{form_busca_ADM.busca_adm.label(class='label-busca-user')}}
+                            {{form_busca_ADM.busca_adm(class='input-busca-user')}}
+
+                            {{form_busca_ADM.botao_confirm_adm(class='botao-busca-user')}}
+
+                            <button type="submit" name="atualizar_ADM" value="user"
+                                class='botao-busca-user'>Atualizar</button>
+
+                        </form>
+                    </div>
+                    <div class="usuarios-tela">
+                        <div class="usuario">
+                            {% if usuarios_ADM %}
+                            {% for usuario_ADM in usuarios_ADM %}
+                            {% if usuario_ADM != None %}
+                            <div class="user-container">
+                                <div class="user">
+                                    <div class='detalhes-user-container'>
+                                        <img src="{{url_for('static', filename='uploads/{}'.format(usuario_ADM.foto)) if usuario_ADM.foto else url_for('static', filename='foto_default/foto_default.png')}}"
+                                            class="img-user">
+                                    </div>
+                                    <div class='detalhes-user-container'>
+                                        <p class="detalhes-user">ID Usuário: {{usuario_ADM.id}}</p>
+                                    </div>
+                                    <div class='detalhes-user-container'>
+                                        <p class="detalhes-user">Username: {{usuario_ADM.username}}</p>
+                                    </div>
+                                    <div class='detalhes-user-container'>
+                                        <p class="detalhes-user">Email: {{usuario_ADM.email}}</p>
+                                    </div>
+                                    <div class='detalhes-user-container'>
+                                        <p class="detalhes-user">Autorização ADM:
+                                            {{usuario_ADM.ADMIN}}
+                                        </p>
+                                    </div>
+                                    <div class='detalhes-user-container' style="border-right: none;">
+                                        <a class="editar-user" href="#"
+                                            onclick="document.getElementById('{{usuario_ADM.id}}').style.display='flex'; return true;">Editar
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal" id="{{usuario_ADM.id}}">
+                                <div class="popup-editar-user">
+                                    <div class="user-container">
+                                        <div class="user">
+                                            <div class='detalhes-user-container'>
+                                                <img src="{{url_for('static', filename='uploads/{}'.format(usuario_ADM.foto)) if usuario_ADM.foto else url_for('static', filename='foto_default/foto_default.png')}}"
+                                                    class="img-user">
+                                            </div>
+                                            <div class='detalhes-user-container'>
+                                                <p class="detalhes-user">ID Usuário: {{usuario_ADM.id}}</p>
+                                            </div>
+                                            <div class='detalhes-user-container'>
+                                                <p class="detalhes-user">Username: {{usuario_ADM.username}}</p>
+                                            </div>
+                                            <div class='detalhes-user-container'>
+                                                <p class="detalhes-user">Email: {{usuario_ADM.email}}</p>
+                                            </div>
+                                            <div class='detalhes-user-container' style="border-right: none;">
+                                                <p class="detalhes-user">Autorização ADM:
+                                                    {{usuario_ADM.ADMIN}}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="botoes-user">
+                                        <a href='#' onclick="document.getElementById('excluir_user_padrao_{{usuario_ADM.id}}').style.display='flex';
+                                                            return true;" class="botao-user">Excluir usuário
+                                        </a>
+                                        <div class="popup-user" id="excluir_user_padrao_{{usuario_ADM.id}}">
+                                            <h2 class="text">Tem certeza de que deseja excluir o usuário?</h2>
+                                            <a class="botao-excluir-user"
+                                                href="{{url_for('excluir_user', id_user=usuario_ADM.id)}}">Sim</a>
+                                            <a href="#" onclick="document.getElementById('excluir_user_padrao_{{usuario_ADM.id}}').style.display='none'; cla
+                                                            return true;" class="link">Voltar</a>
+                                        </div>
+
+                                        {% if usuario.email == 'adm@gmail.com' %}
+                                        <a href="#" onclick="document.getElementById('remover_privilegios_{{usuario_ADM.id}}').style.display='flex';
+                                                            return true;" class="botao-user">Remover
+                                            privlégios
+                                            administrativos</a>
+                                        <div class="popup-user" id="remover_privilegios_{{usuario_ADM.id}}">
+                                            <h2 class="text">Remover privilégios administrativos para o usuário?</h2>
+                                            <a class="botao-user"
+                                                href="{{url_for('remover_privilegios', id_user=usuario_ADM.id)}}">Sim</a>
+                                            <a href="#" onclick="document.getElementById('remover_privilegios_{{usuario_ADM.id}}').style.display='none';
+                                                            return true;" class="link">Voltar</a>
+                                        </div>
+                                        {% endif %}
+
+                                        <a href="#" onclick="document.getElementById('{{usuario_ADM.id}}').style.display='none';
+                                                            return true;" class="link">Voltar</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if usuario_ADM == None %}
+                            <h2 class="sem-user">Usuário não encontrado!</h2>
+                            {% endif %}
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </content>
+    </div>
+
+    {% endblock %}
+</body>
+
+</html>

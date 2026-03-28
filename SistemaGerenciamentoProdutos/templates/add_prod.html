@@ -1,0 +1,57 @@
+{% extends "homepage.html" %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block titulo %}
+        SGP - Adicionar Produto
+        {% endblock %}
+    </title>
+</head>
+
+
+<body>
+
+    {% block content %}
+    <div>
+        <header class="header">
+            <h2>Adicionar Produto</h2>
+            <div class="menu">
+                <a style="width: 100px;" href="{{url_for('gerenciador')}}">Voltar</a>
+            </div>
+        </header>
+        <div class="card-form">
+            <h2>Adicionar Produto</h2>
+
+            <form method="POST" class="form">
+                {{form.csrf_token}}
+
+                <div class="div-input">
+                    {{form.nome_prod.label(class='label')}}
+                    {{form.nome_prod(class='input')}}
+                </div>
+
+                <div class="div-input">
+                    {{form.preco.label(class='label')}}
+                    {{form.preco(class='input')}}
+                </div>
+
+                <div class="div-input">
+                    {{form.quantidade_est.label(class='label')}}
+                    {{form.quantidade_est(class='input')}}
+                </div>
+
+                <div class="div-botao">
+                    {{form.botao_confirm(class='botao')}}
+                </div>
+            </form>
+        </div>
+    </div>
+    {% endblock %}
+
+</body>
+
+
+</html>

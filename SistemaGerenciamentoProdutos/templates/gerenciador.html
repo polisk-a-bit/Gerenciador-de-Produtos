@@ -1,0 +1,108 @@
+{% extends "homepage.html" %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block titulo %}
+        SGP - Gerenciador
+        {% endblock %}
+    </title>
+</head>
+
+
+
+<body>
+    {% block content %}
+    <div>
+        <header class="header">
+            <h2 id="text">Sistema de Gerenciamento de Produtos</h2>
+
+            <div class="menu">
+                <a href="{{url_for('perfil', username_usuario=usuario.username)}}">{{usuario.username}}</a>
+                {% if usuario.ADMIN == True %}
+                <a href="{{url_for('gerenciador_user', username_usuario=usuario.username)}}"
+                    id="gerenciar-usuarios">Gerenciar Usuários</a>
+                {% endif %}
+                <a href="{{url_for('logout')}}" id="sair">Sair</a>
+                <img
+                    src="{{ url_for('static', filename='uploads/{}'.format(usuario.foto)) if usuario.foto else url_for('static', filename='foto_default/foto_default.png') }}">
+            </div>
+        </header>
+
+        <div class="content">
+            <div class="produtos-busca">
+                <form method="POST" class="form-busca" id="form-busca-prod">
+                    {{form.csrf_token}}
+
+                    {{form.busca.label(class='label-busca')}}
+                    {{form.busca(class='input-busca')}}
+
+                    {{form.botao_confirm(class='botao-busca')}}
+
+                    <button type="submit" name="Atualizar" value="Atualizar" class="botao-busca">Atualizar</button>
+                </form>
+
+                <div class="produtos">
+                    <div class="produtos-cad">
+                        <h2 id="text-2">Produtos Cadastrados:</h2>
+                    </div>
+                    <div class="produtos-cadastrados">
+                        {% if produtos %}
+                        {% for produto in produtos %}
+                        {% if produto != None %}
+                        <div class="produto">
+                            <div class="produto-container">
+                                <div class="produto-detalhes">
+                                    <p class="detalhes">ID Produto: <b>{{produto.id}}</b></p>
+                                </div>
+                                <div class="produto-detalhes">
+                                    <p class="detalhes">Nome Produto: <b>{{produto.nome_produto}}</b></p>
+                                </div>
+                                <div class="produto-detalhes">
+                                    <p class="detalhes">Preço Produto: <b>R${{produto.preco}} </b></p>
+                                </div>
+                                <div class="produto-detalhes">
+                                    <p class="detalhes">Quantidade em Estoque:
+                                        <b>{{produto.quantidade_estoque}}</b>
+                                    </p>
+                                </div>
+                                <div class="produto-detalhes">
+                                    <p class="detalhes">Data de Cadasatro:
+                                        <b>{{produto.data_cadastro.strftime('%d/%m/%Y')}}</b>
+                                    </p>
+                                </div>
+                                <div class="produto-detalhes" style="border-right: none;">
+                                    {% if usuario.ADMIN == True %}
+                                    <a class="editar-prod"
+                                        href="{{ url_for('att_prod', id_produto=produto.id) }}">Editar Produto</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% if produto == None %}
+
+                        <h2 class="sem-prod">
+                            Produto não encontrado!
+                        </h2>
+
+                        {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="add-prod">
+                        {% if usuario.ADMIN == True %}
+                        <a href="{{ url_for('add_prod') }}">Adicionar Produto</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+</body>
+
+</html>
